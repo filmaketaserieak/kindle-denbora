@@ -1,0 +1,522 @@
+/* Diseño para Kindle Paperwhite 7 en horizontal y el WebKit antiguo de Mesquite.
+   Se evita CSS Grid/Flex para que el calendario y las tres previsiones se rendericen bien. */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+    color: #000;
+    background: #fff;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+* { box-sizing: border-box; }
+a { color: #000; background: #fff; text-decoration: none; }
+html.night, .night body { color: #fff; background: #000; }
+#page {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+}
+.night #page { color: #fff; background: #000; }
+#cleaner { position: absolute; top: 0; right: 0; bottom: 0; left: 0; display: none; }
+.panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 33.3333%;
+    overflow: hidden;
+    border: 2px solid #000;
+    background: #fff;
+}
+.night .panel { color: #fff; border-color: #fff; background: #000; }
+#currentPanel { left: 0; }
+#forecastPanel { left: 33.3333%; }
+#calendarPanel { left: 66.6666%; }
+
+/* Columna 1: condiciones actuales */
+#city {
+    position: absolute;
+    top: 2.5%;
+    left: 5%;
+    max-width: 70%;
+    font-size: 3.1vh;
+    line-height: 1.1;
+    font-weight: bold;
+}
+#clock {
+    position: absolute;
+    top: 2.5%;
+    right: 5%;
+    font-size: 3.4vh;
+    line-height: 1;
+    font-weight: bold;
+}
+#date {
+    position: absolute;
+    top: 8.5%;
+    left: 5%;
+    right: 4%;
+    font-size: 2.1vh;
+    line-height: 1.25;
+}
+#iconWrapper {
+    position: absolute;
+    top: 18%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    height: 21%;
+}
+#icon { font-size: 10vh; line-height: 1; }
+.tempWrapper {
+    position: absolute;
+    top: 38%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+#temp { display: inline-block; font-size: 8.3vh; line-height: 1; font-weight: bold; }
+#description {
+    position: absolute;
+    top: 51%;
+    left: 4%;
+    right: 4%;
+    font-size: 2.4vh;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: capitalize;
+}
+#sun {
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    bottom: 9%;
+    font-size: 2.05vh;
+    line-height: 1.5;
+    text-align: center;
+    font-weight: bold;
+}
+#lastUpdate {
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    bottom: 2%;
+    font-size: 1.55vh;
+    text-align: center;
+}
+
+/* Columna 2: tres franjas de previsión verticales */
+.panelTitle {
+    position: absolute;
+    top: 2%;
+    left: 3%;
+    right: 3%;
+    height: 7%;
+    text-align: center;
+    font-size: 2.4vh;
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+    padding-bottom: 1%;
+}
+.night .panelTitle { border-color: #fff; }
+.forecast {
+    position: absolute;
+    top: 10%;
+    left: 2%;
+    right: 2%;
+    bottom: 2%;
+    border: 1px solid #000;
+    overflow: hidden;
+}
+.night .forecast, .night .col { border-color: #fff; }
+.col {
+    position: relative;
+    height: 33.3333%;
+    width: 100%;
+    border-bottom: 1px solid #000;
+    text-align: center;
+    overflow: hidden;
+}
+.col:last-child { border-bottom: 0; }
+.colTime {
+    position: absolute;
+    top: 4%;
+    left: 2%;
+    right: 2%;
+    font-size: 2.5vh;
+    line-height: 1.1;
+    font-weight: bold;
+}
+.forecastIconWrapper {
+    position: absolute;
+    top: 22%;
+    left: 0;
+    width: 100%;
+    font-size: 4.8vh;
+    line-height: 1;
+}
+.colTemp {
+    position: absolute;
+    top: 52%;
+    left: 0;
+    right: 0;
+    font-size: 4.2vh;
+    line-height: 1;
+    font-weight: bold;
+}
+.colDesc {
+    position: absolute;
+    top: 76%;
+    left: 3%;
+    right: 3%;
+    font-size: 1.9vh;
+    line-height: 1.1;
+    text-transform: capitalize;
+}
+
+/* Columna 3: calendario; inline-block en lugar de CSS Grid por compatibilidad */
+#calendarTitle {
+    position: absolute;
+    top: 3%;
+    left: 3%;
+    right: 3%;
+    height: 12%;
+    border-bottom: 2px solid #000;
+    text-align: center;
+    font-size: 2.8vh;
+    line-height: 1.3;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.night #calendarTitle { border-color: #fff; }
+#calendarGrid {
+    position: absolute;
+    top: 17%;
+    left: 3%;
+    right: 3%;
+    bottom: 3%;
+    font-size: 0;
+    text-align: center;
+    overflow: hidden;
+}
+.calDow, .calDay, .calBlank {
+    display: inline-block;
+    width: 14.2857%;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+}
+.calDow {
+    height: 13%;
+    font-size: 2.2vh;
+    line-height: 1.4;
+    font-weight: bold;
+}
+.calDay, .calBlank {
+    height: 14.4%;
+    font-size: 2.5vh;
+    line-height: 1.7;
+}
+.calDay.today {
+    font-weight: bold;
+    text-decoration: underline;
+    border: 2px solid #000;
+}
+.night .calDay.today { border-color: #fff; }
+
+/* En pantallas de baja altura, reducir solo los elementos decorativos. */
+@media (max-height: 600px) {
+    #icon { font-size: 8vh; }
+    #temp { font-size: 7.2vh; }
+    .forecastIconWrapper { font-size: 4vh; }
+    .colTemp { font-size: 3.6vh; }
+    .calDay, .calBlank { font-size: 2.2vh; }
+}
+
+
+/* Botón visible para volver a la configuración desde el panel principal */
+#configButton {
+    position: absolute;
+    left: 18%;
+    right: 18%;
+    top: 65%;
+    display: block;
+    padding: 1.4vh 1%;
+    border: 2px solid #000;
+    text-align: center;
+    font-size: 2.25vh;
+    line-height: 1.2;
+    font-weight: bold;
+    background: #fff;
+    color: #000;
+    z-index: 5;
+}
+.night #configButton {
+    border-color: #fff;
+    background: #000;
+    color: #fff;
+}
+#configButton:active {
+    background: #ddd;
+}
+
+
+/* V7: legibilidad prioritaria en Kindle Paperwhite 7 + Mesquite.
+   El calendario usa tabla HTML por compatibilidad con WebKit antiguo. */
+html, body, #page { font-family: Arial, Helvetica, sans-serif !important; }
+#city { font-size: 30px !important; line-height: 1.12 !important; }
+#clock { font-size: 38px !important; }
+#date { font-size: 24px !important; line-height: 1.2 !important; }
+#icon { font-size: 88px !important; }
+#temp { font-size: 82px !important; }
+#description { font-size: 27px !important; line-height: 1.18 !important; }
+#sun { font-size: 23px !important; line-height: 1.45 !important; font-weight: bold !important; }
+#lastUpdate { font-size: 18px !important; }
+.panelTitle { font-size: 28px !important; line-height: 1.2 !important; }
+.colTime { font-size: 30px !important; }
+.forecastIconWrapper { font-size: 54px !important; }
+.colTemp { font-size: 42px !important; }
+.colDesc { font-size: 23px !important; line-height: 1.15 !important; }
+#configButton { font-size: 24px !important; padding: 10px 2% !important; }
+
+/* Calendario: tabla de siete columnas y seis semanas, con celdas de altura real. */
+#calendarTitle {
+    top: 2% !important;
+    height: 12% !important;
+    font-size: 30px !important;
+    line-height: 1.25 !important;
+    padding-top: 4px;
+}
+#calendarGrid {
+    top: 15% !important;
+    left: 2% !important;
+    right: 2% !important;
+    bottom: 2% !important;
+    font-size: 26px !important;
+    overflow: hidden !important;
+}
+.calendarTable {
+    width: 100% !important;
+    height: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+.calendarTable thead { height: 14% !important; }
+.calendarTable tbody { height: 86% !important; }
+.calendarTable tr { height: 14.285% !important; }
+.calendarTable th, .calendarTable td {
+    width: 14.285% !important;
+    padding: 0 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    overflow: hidden !important;
+    border: 1px solid #777 !important;
+    color: #000 !important;
+    background: #fff !important;
+}
+.calendarTable th.calDow {
+    font-size: 25px !important;
+    line-height: 1 !important;
+    font-weight: bold !important;
+    border-bottom: 2px solid #000 !important;
+}
+.calendarTable td.calDay {
+    font-size: 28px !important;
+    line-height: 1 !important;
+    font-weight: normal !important;
+}
+.calendarTable td.calBlank { font-size: 20px !important; }
+.calendarTable td.calDay.today {
+    font-size: 30px !important;
+    font-weight: bold !important;
+    border: 3px solid #000 !important;
+    text-decoration: none !important;
+}
+.night .calendarTable th, .night .calendarTable td {
+    color: #fff !important;
+    background: #000 !important;
+    border-color: #aaa !important;
+}
+.night .calendarTable th.calDow, .night .calendarTable td.calDay.today {
+    border-color: #fff !important;
+}
+/* Do not shrink text again in the old low-height media rule. */
+@media (max-height: 600px) {
+    #icon { font-size: 76px !important; }
+    #temp { font-size: 72px !important; }
+    .forecastIconWrapper { font-size: 48px !important; }
+    .colTemp { font-size: 38px !important; }
+    .calDay, .calBlank { font-size: 26px !important; }
+}
+
+
+/* V8: +50% de tipografía y calendario robusto para Mesquite/WebKit antiguo. */
+#city { font-size: 45px !important; }
+#clock { font-size: 57px !important; }
+#date { font-size: 36px !important; }
+#icon { font-size: 132px !important; }
+#temp { font-size: 123px !important; }
+#description { font-size: 40px !important; }
+#sun { font-size: 35px !important; }
+#lastUpdate { font-size: 27px !important; }
+.panelTitle { font-size: 42px !important; }
+.colTime { font-size: 45px !important; }
+.forecastIconWrapper { font-size: 81px !important; }
+.colTemp { font-size: 63px !important; }
+.colDesc { font-size: 35px !important; }
+#configButton { font-size: 36px !important; padding: 15px 2% !important; }
+
+#calendarTitle {
+  font-size: 45px !important;
+  height: 11% !important;
+  line-height: 1.15 !important;
+}
+#calendarGrid {
+  top: 14% !important;
+  bottom: 1% !important;
+  overflow: visible !important;
+}
+.calendarTable {
+  width: 100% !important;
+  height: auto !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+}
+.calendarTable thead, .calendarTable tbody { height: auto !important; }
+.calendarTable tr { height: auto !important; }
+.calendarTable th, .calendarTable td {
+  height: 52px !important;
+  padding: 0 !important;
+  line-height: 1.15 !important;
+  vertical-align: middle !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+.calendarTable th.calDow {
+  height: 42px !important;
+  font-size: 38px !important;
+  line-height: 1.1 !important;
+}
+.calendarTable td.calDay {
+  font-size: 42px !important;
+  line-height: 1.1 !important;
+}
+.calendarTable td.calBlank { font-size: 30px !important; }
+.calendarTable td.calDay.today {
+  font-size: 45px !important;
+  border: 3px solid #000 !important;
+}
+@media (max-height: 700px) {
+  #icon { font-size: 112px !important; }
+  #temp { font-size: 105px !important; }
+  .forecastIconWrapper { font-size: 68px !important; }
+  .colTemp { font-size: 56px !important; }
+  .calendarTable th.calDow { height: 34px !important; font-size: 32px !important; }
+  .calendarTable th, .calendarTable td { height: 43px !important; }
+  .calendarTable td.calDay { font-size: 36px !important; }
+  .calendarTable td.calDay.today { font-size: 39px !important; }
+}
+
+/* V9: aprovechar el espacio bajo el calendario con una curiosidad diaria offline. */
+#calendarTitle { height: 9% !important; }
+#calendarGrid {
+  top: 11% !important;
+  height: 47% !important;
+  bottom: auto !important;
+  overflow: hidden !important;
+}
+.calendarTable { height: 100% !important; }
+.calendarTable th, .calendarTable td { height: 1px !important; }
+#dailyFact {
+  position: absolute !important;
+  top: 62% !important;
+  left: 5% !important;
+  right: 5% !important;
+  bottom: 2% !important;
+  border-top: 2px solid #000 !important;
+  padding: 3% 2% 0 2% !important;
+  overflow: hidden !important;
+  color: #000 !important;
+  background: #fff !important;
+  text-align: left !important;
+}
+#dailyFactTitle {
+  font-size: 27px !important;
+  font-weight: bold !important;
+  line-height: 1.1 !important;
+  margin-bottom: 12px !important;
+}
+#dailyFactText {
+  font-size: 35px !important;
+  line-height: 1.2 !important;
+  font-weight: normal !important;
+  overflow: hidden !important;
+}
+.night #dailyFact {
+  color: #fff !important;
+  background: #000 !important;
+  border-color: #fff !important;
+}
+.night #dailyFactTitle, .night #dailyFactText { color: #fff !important; }
+
+/* V11: duplicados de hora y mes para el zoom del navegador; los originales no se mueven ni cambian de tamaño. */
+#clockDuplicate {
+  position: absolute !important;
+  top: 75% !important;
+  left: 5% !important;
+  right: 5% !important;
+  text-align: center !important;
+  font-size: 3.4vh !important;
+  line-height: 1 !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  background: #fff !important;
+  z-index: 6 !important;
+}
+#calendarTitleDuplicate {
+  position: absolute !important;
+  top: 58% !important;
+  left: 5% !important;
+  right: 5% !important;
+  height: 4% !important;
+  text-align: center !important;
+  font-size: 2.8vh !important;
+  line-height: 1.2 !important;
+  font-weight: bold !important;
+  text-transform: capitalize !important;
+  color: #000 !important;
+  background: #fff !important;
+  overflow: hidden !important;
+  z-index: 2 !important;
+}
+#dailyFact { top: 66% !important; }
+.night #clockDuplicate, .night #calendarTitleDuplicate {
+  color: #fff !important;
+  background: #000 !important;
+}
+
+/* V12: botón más compacto; duplicados inferiores más legibles. */
+#configButton {
+  font-size: 16px !important;
+  padding: 5px 8px !important;
+  line-height: 1.0 !important;
+  min-height: 0 !important;
+}
+#clockDuplicate {
+  font-size: 60px !important;
+  line-height: 1.05 !important;
+  font-weight: bold !important;
+}
+#calendarTitleDuplicate {
+  font-size: 30px !important;
+  line-height: 1.1 !important;
+}
