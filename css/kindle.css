@@ -1,0 +1,90 @@
+/* Mantener la tipografía del proyecto original y ocupar el viewport real de Mesquite.
+   No usar width=320 en el meta viewport: provoca zoom en pantallas Paperwhite. */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0;
+    color: #000;
+    background: #fff;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+* { box-sizing: border-box; }
+a { color:#000; background:#fff; }
+html.night { color:#fff; background:#000; }
+.night a { color:#fff; background:#000; }
+#cleaner { position:absolute; inset:0; display:none; }
+#page { position:fixed; top:0; left:0; right:0; bottom:0; height:100%; width:100%; overflow:hidden; background:#fff; }
+.night #page { background:#000; }
+#city { position:absolute; top:3%; left:3%; max-width:35%; display:block; font-size:4.2rem; line-height:1.1; font-weight:bold; text-decoration:none; }
+#clock { position:absolute; top:3%; right:4%; font-size:4.8rem; font-weight:bold; line-height:1; }
+#date { position:absolute; top:12%; left:3%; max-width:45%; font-size:1.6rem; }
+#iconWrapper { position:absolute; left:4%; top:23%; width:20%; text-align:center; }
+#icon { font-size:13rem; }
+.tempWrapper { position:absolute; left:5%; top:45%; width:19%; text-align:center; }
+#temp { display:inline-block; font-size:7.8rem; font-weight:bold; }
+#description { position:absolute; left:3%; top:68%; width:22%; font-size:1.45rem; text-align:center; }
+#lastUpdate { position:absolute; left:3%; bottom:3%; font-size:1rem; }
+#sun { position:absolute; left:3%; bottom:9%; width:23%; font-size:1.05rem; }
+.forecast { position:absolute; left:27%; top:20%; bottom:8%; width:43%; border-top:3px solid #000; border-bottom:1px solid #000; display:flex; }
+.night .forecast, .night .col { border-color:#fff; }
+.col { flex:1; min-width:0; border-right:1px solid #000; text-align:center; height:100%; overflow:hidden; display:flex; flex-direction:column; align-items:center; }
+.col:last-child { border-right:none; }
+.colTime { font-size:1.7rem; margin-top:12%; font-weight:bold; }
+.forecastIconWrapper { font-size:4.8rem; margin-top:10%; }
+.colTemp { font-size:2.8rem; font-weight:bold; margin-top:8%; }
+.colDesc { font-size:1.05rem; margin:8% 3% 0; line-height:1.15; }
+#calendar { position:absolute; right:3%; top:23%; width:24%; }
+#calendarTitle { text-align:center; font-size:1.8rem; font-weight:bold; text-transform:capitalize; border-bottom:2px solid #000; padding-bottom:5%; margin-bottom:4%; }
+#calendarGrid { display:grid; grid-template-columns:repeat(7, 1fr); gap:2px; text-align:center; }
+.calDow { font-size:1.05rem; font-weight:bold; padding-bottom:5px; }
+.calDay, .calBlank { font-size:1.15rem; min-height:1.3em; display:flex; align-items:center; justify-content:center; }
+.calDay.today { color:#fff; background:#000; border-radius:50%; font-weight:bold; }
+.night .calDay.today { color:#000; background:#fff; }
+.landscape #city { font-size:4.2rem; }
+.landscape #clock { font-size:4.8rem; }
+.landscape #temp { font-size:7.8rem; }
+.landscape #icon { font-size:13rem; }
+.portrait .forecast { left:27%; width:43%; }
+.feelsLike, .feelsLike * { font-style:italic; }
+@media (max-width:650px) { #city {font-size:2.8rem;} #clock {font-size:3.4rem;} #icon {font-size:9rem;} #temp {font-size:5.5rem;} .colTime{font-size:1.2rem;} .forecastIconWrapper{font-size:3.4rem;} .colTemp{font-size:2rem;} .colDesc{font-size:.85rem;} #calendarTitle{font-size:1.3rem;} .calDay,.calBlank{font-size:.85rem;} }
+
+
+/* Kindle Paperwhite 7 en horizontal: mantener todos los elementos dentro del área
+   visible que entrega Mesquite, sin depender del zoom del navegador. */
+@media (orientation: landscape) {
+    html, body, #page { width: 100%; height: 100%; }
+    #city { top: 2.5%; left: 2.5%; max-width: 30%; font-size: 3.7rem; }
+    #clock { top: 2.5%; right: 3%; font-size: 3.5rem; }
+    #date { top: 11%; left: 2.5%; max-width: 40%; font-size: 1.35rem; }
+    #iconWrapper { left: 3%; top: 22%; width: 18%; }
+    #icon { font-size: 10.5rem; }
+    .tempWrapper { left: 3%; top: 43%; width: 18%; }
+    #temp { font-size: 6.4rem; }
+    #description { left: 2.5%; top: 66%; width: 20%; font-size: 1.2rem; }
+    #sun { left: 2.5%; bottom: 8%; width: 22%; font-size: .9rem; }
+    #lastUpdate { left: 2.5%; bottom: 2%; font-size: .8rem; }
+    .forecast { left: 24%; top: 19%; bottom: 7%; width: 48%; }
+    .colTime { font-size: 1.35rem; margin-top: 9%; }
+    .forecastIconWrapper { font-size: 3.9rem; margin-top: 7%; }
+    .colTemp { font-size: 2.3rem; margin-top: 6%; }
+    .colDesc { font-size: .9rem; margin-top: 6%; }
+    #calendar { right: 2%; top: 21%; width: 24%; }
+    #calendarTitle { font-size: 1.35rem; padding-bottom: 3%; margin-bottom: 3%; }
+    .calDow { font-size: .8rem; padding-bottom: 2px; }
+    .calDay, .calBlank { font-size: .85rem; min-height: 1.15em; }
+}
+
+/* Ventanas de navegador algo más bajas: reducir el contenido sin activar zoom. */
+@media (max-height: 430px) {
+    #icon { font-size: 9rem; }
+    #temp { font-size: 5.6rem; }
+    .forecastIconWrapper { font-size: 3.2rem; }
+    .colTemp { font-size: 2rem; }
+    #calendar { top: 19%; }
+}
