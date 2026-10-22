@@ -425,3 +425,45 @@ html, body, #page { font-family: Arial, Helvetica, sans-serif !important; }
   .calendarTable td.calDay { font-size: 36px !important; }
   .calendarTable td.calDay.today { font-size: 39px !important; }
 }
+
+/* V9: aprovechar el espacio bajo el calendario con una curiosidad diaria offline. */
+#calendarTitle { height: 9% !important; }
+#calendarGrid {
+  top: 11% !important;
+  height: 47% !important;
+  bottom: auto !important;
+  overflow: hidden !important;
+}
+.calendarTable { height: 100% !important; }
+.calendarTable th, .calendarTable td { height: 1px !important; }
+#dailyFact {
+  position: absolute !important;
+  top: 62% !important;
+  left: 5% !important;
+  right: 5% !important;
+  bottom: 2% !important;
+  border-top: 2px solid #000 !important;
+  padding: 3% 2% 0 2% !important;
+  overflow: hidden !important;
+  color: #000 !important;
+  background: #fff !important;
+  text-align: left !important;
+}
+#dailyFactTitle {
+  font-size: 27px !important;
+  font-weight: bold !important;
+  line-height: 1.1 !important;
+  margin-bottom: 12px !important;
+}
+#dailyFactText {
+  font-size: 25px !important;
+  line-height: 1.2 !important;
+  font-weight: normal !important;
+  overflow: hidden !important;
+}
+.night #dailyFact {
+  color: #fff !important;
+  background: #000 !important;
+  border-color: #fff !important;
+}
+.night #dailyFactTitle, .night #dailyFactText { color: #fff !important; }
