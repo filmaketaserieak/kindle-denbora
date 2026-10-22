@@ -134,11 +134,27 @@
             var first = now.clone().startOf("month");
             var offset = (first.day() + 6) % 7; // Monday first
             var days = now.daysInMonth();
-            var html = "";
+            // Use a real HTML table: old Kindle/Mesquite WebKit can misrender
+            // inline-block calendar cells and show only the selected-day border.
             var labels = ["L","M","X","J","V","S","D"];
-            for (var h = 0; h < labels.length; h++) html += "<span class='calDow'>" + labels[h] + "</span>";
-            for (var b = 0; b < offset; b++) html += "<span class='calBlank'></span>";
-            for (var d = 1; d <= days; d++) html += "<span class='calDay" + (d === now.date() ? " today" : "") + "'>" + d + "</span>";
+            var html = "<table class='calendarTable' cellspacing='0' cellpadding='0'><thead><tr>";
+            for (var h = 0; h < labels.length; h++) html += "<th class='calDow'>" + labels[h] + "</th>";
+            html += "</tr></thead><tbody>";
+            var day = 1;
+            for (var week = 0; week < 6; week++) {
+                html += "<tr>";
+                for (var dow = 0; dow < 7; dow++) {
+                    var slot = week * 7 + dow;
+                    if (slot < offset || day > days) {
+                        html += "<td class='calBlank'>&nbsp;</td>";
+                    } else {
+                        html += "<td class='calDay" + (day === now.date() ? " today" : "") + "'>" + day + "</td>";
+                        day++;
+                    }
+                }
+                html += "</tr>";
+            }
+            html += "</tbody></table>";
             grid.innerHTML = html;
         }
 
@@ -645,6 +661,7 @@
         <div id="iconWrapper"><i id="icon"></i></div>
         <div class="tempWrapper"><div id="temp"></div></div>
         <div id="description"></div>
+        <a id="configButton" href="./config.html">CONFIGURAR</a>
         <div id="sun"></div>
         <div id="lastUpdate"></div>
     </section>

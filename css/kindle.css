@@ -238,3 +238,121 @@ html.night, .night body { color: #fff; background: #000; }
     .colTemp { font-size: 3.6vh; }
     .calDay, .calBlank { font-size: 2.2vh; }
 }
+
+
+/* Botón visible para volver a la configuración desde el panel principal */
+#configButton {
+    position: absolute;
+    left: 18%;
+    right: 18%;
+    top: 65%;
+    display: block;
+    padding: 1.4vh 1%;
+    border: 2px solid #000;
+    text-align: center;
+    font-size: 2.25vh;
+    line-height: 1.2;
+    font-weight: bold;
+    background: #fff;
+    color: #000;
+    z-index: 5;
+}
+.night #configButton {
+    border-color: #fff;
+    background: #000;
+    color: #fff;
+}
+#configButton:active {
+    background: #ddd;
+}
+
+
+/* V7: legibilidad prioritaria en Kindle Paperwhite 7 + Mesquite.
+   El calendario usa tabla HTML por compatibilidad con WebKit antiguo. */
+html, body, #page { font-family: Arial, Helvetica, sans-serif !important; }
+#city { font-size: 30px !important; line-height: 1.12 !important; }
+#clock { font-size: 38px !important; }
+#date { font-size: 24px !important; line-height: 1.2 !important; }
+#icon { font-size: 88px !important; }
+#temp { font-size: 82px !important; }
+#description { font-size: 27px !important; line-height: 1.18 !important; }
+#sun { font-size: 23px !important; line-height: 1.45 !important; font-weight: bold !important; }
+#lastUpdate { font-size: 18px !important; }
+.panelTitle { font-size: 28px !important; line-height: 1.2 !important; }
+.colTime { font-size: 30px !important; }
+.forecastIconWrapper { font-size: 54px !important; }
+.colTemp { font-size: 42px !important; }
+.colDesc { font-size: 23px !important; line-height: 1.15 !important; }
+#configButton { font-size: 24px !important; padding: 10px 2% !important; }
+
+/* Calendario: tabla de siete columnas y seis semanas, con celdas de altura real. */
+#calendarTitle {
+    top: 2% !important;
+    height: 12% !important;
+    font-size: 30px !important;
+    line-height: 1.25 !important;
+    padding-top: 4px;
+}
+#calendarGrid {
+    top: 15% !important;
+    left: 2% !important;
+    right: 2% !important;
+    bottom: 2% !important;
+    font-size: 26px !important;
+    overflow: hidden !important;
+}
+.calendarTable {
+    width: 100% !important;
+    height: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+.calendarTable thead { height: 14% !important; }
+.calendarTable tbody { height: 86% !important; }
+.calendarTable tr { height: 14.285% !important; }
+.calendarTable th, .calendarTable td {
+    width: 14.285% !important;
+    padding: 0 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    overflow: hidden !important;
+    border: 1px solid #777 !important;
+    color: #000 !important;
+    background: #fff !important;
+}
+.calendarTable th.calDow {
+    font-size: 25px !important;
+    line-height: 1 !important;
+    font-weight: bold !important;
+    border-bottom: 2px solid #000 !important;
+}
+.calendarTable td.calDay {
+    font-size: 28px !important;
+    line-height: 1 !important;
+    font-weight: normal !important;
+}
+.calendarTable td.calBlank { font-size: 20px !important; }
+.calendarTable td.calDay.today {
+    font-size: 30px !important;
+    font-weight: bold !important;
+    border: 3px solid #000 !important;
+    text-decoration: none !important;
+}
+.night .calendarTable th, .night .calendarTable td {
+    color: #fff !important;
+    background: #000 !important;
+    border-color: #aaa !important;
+}
+.night .calendarTable th.calDow, .night .calendarTable td.calDay.today {
+    border-color: #fff !important;
+}
+/* Do not shrink text again in the old low-height media rule. */
+@media (max-height: 600px) {
+    #icon { font-size: 76px !important; }
+    #temp { font-size: 72px !important; }
+    .forecastIconWrapper { font-size: 48px !important; }
+    .colTemp { font-size: 38px !important; }
+    .calDay, .calBlank { font-size: 26px !important; }
+}
