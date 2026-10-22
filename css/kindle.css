@@ -356,3 +356,72 @@ html, body, #page { font-family: Arial, Helvetica, sans-serif !important; }
     .colTemp { font-size: 38px !important; }
     .calDay, .calBlank { font-size: 26px !important; }
 }
+
+
+/* V8: +50% de tipografía y calendario robusto para Mesquite/WebKit antiguo. */
+#city { font-size: 45px !important; }
+#clock { font-size: 57px !important; }
+#date { font-size: 36px !important; }
+#icon { font-size: 132px !important; }
+#temp { font-size: 123px !important; }
+#description { font-size: 40px !important; }
+#sun { font-size: 35px !important; }
+#lastUpdate { font-size: 27px !important; }
+.panelTitle { font-size: 42px !important; }
+.colTime { font-size: 45px !important; }
+.forecastIconWrapper { font-size: 81px !important; }
+.colTemp { font-size: 63px !important; }
+.colDesc { font-size: 35px !important; }
+#configButton { font-size: 36px !important; padding: 15px 2% !important; }
+
+#calendarTitle {
+  font-size: 45px !important;
+  height: 11% !important;
+  line-height: 1.15 !important;
+}
+#calendarGrid {
+  top: 14% !important;
+  bottom: 1% !important;
+  overflow: visible !important;
+}
+.calendarTable {
+  width: 100% !important;
+  height: auto !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+}
+.calendarTable thead, .calendarTable tbody { height: auto !important; }
+.calendarTable tr { height: auto !important; }
+.calendarTable th, .calendarTable td {
+  height: 52px !important;
+  padding: 0 !important;
+  line-height: 1.15 !important;
+  vertical-align: middle !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+.calendarTable th.calDow {
+  height: 42px !important;
+  font-size: 38px !important;
+  line-height: 1.1 !important;
+}
+.calendarTable td.calDay {
+  font-size: 42px !important;
+  line-height: 1.1 !important;
+}
+.calendarTable td.calBlank { font-size: 30px !important; }
+.calendarTable td.calDay.today {
+  font-size: 45px !important;
+  border: 3px solid #000 !important;
+}
+@media (max-height: 700px) {
+  #icon { font-size: 112px !important; }
+  #temp { font-size: 105px !important; }
+  .forecastIconWrapper { font-size: 68px !important; }
+  .colTemp { font-size: 56px !important; }
+  .calendarTable th.calDow { height: 34px !important; font-size: 32px !important; }
+  .calendarTable th, .calendarTable td { height: 43px !important; }
+  .calendarTable td.calDay { font-size: 36px !important; }
+  .calendarTable td.calDay.today { font-size: 39px !important; }
+}
