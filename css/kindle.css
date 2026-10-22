@@ -467,3 +467,56 @@ html, body, #page { font-family: Arial, Helvetica, sans-serif !important; }
   border-color: #fff !important;
 }
 .night #dailyFactTitle, .night #dailyFactText { color: #fff !important; }
+
+/* V11: duplicados de hora y mes para el zoom del navegador; los originales no se mueven ni cambian de tamaño. */
+#clockDuplicate {
+  position: absolute !important;
+  top: 75% !important;
+  left: 5% !important;
+  right: 5% !important;
+  text-align: center !important;
+  font-size: 3.4vh !important;
+  line-height: 1 !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  background: #fff !important;
+  z-index: 6 !important;
+}
+#calendarTitleDuplicate {
+  position: absolute !important;
+  top: 58% !important;
+  left: 5% !important;
+  right: 5% !important;
+  height: 4% !important;
+  text-align: center !important;
+  font-size: 2.8vh !important;
+  line-height: 1.2 !important;
+  font-weight: bold !important;
+  text-transform: capitalize !important;
+  color: #000 !important;
+  background: #fff !important;
+  overflow: hidden !important;
+  z-index: 2 !important;
+}
+#dailyFact { top: 66% !important; }
+.night #clockDuplicate, .night #calendarTitleDuplicate {
+  color: #fff !important;
+  background: #000 !important;
+}
+
+/* V12: botón más compacto; duplicados inferiores más legibles. */
+#configButton {
+  font-size: 16px !important;
+  padding: 5px 8px !important;
+  line-height: 1.0 !important;
+  min-height: 0 !important;
+}
+#clockDuplicate {
+  font-size: 5.2vh !important;
+  line-height: 1.05 !important;
+  font-weight: bold !important;
+}
+#calendarTitleDuplicate {
+  font-size: 4.2vh !important;
+  line-height: 1.1 !important;
+}

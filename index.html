@@ -125,6 +125,17 @@
         }
 
         function updateClockAndCalendar() {
+            // Modo automático: oscuro desde las 22:00 hasta las 06:59; claro desde las 07:00.
+            var localHour = new Date().getHours();
+            var useNightMode = (localHour >= 22 || localHour < 7);
+            if (document.body) {
+                if (useNightMode) {
+                    if (document.body.className.indexOf("night") === -1) document.body.className += " night";
+                } else {
+                    document.body.className = document.body.className.replace(/\\bnight\\b/g, "").replace(/\\s+/g, " ").replace(/^ | $/g, "");
+                }
+            }
+
             var factText = document.getElementById("dailyFactText");
             if (factText && typeof curiosidades !== "undefined" && curiosidades.length) {
                 var dateForFact = new Date();
@@ -136,10 +147,14 @@
             var now = momentWithCorrectUtcOffset(new Date());
             var clock = document.getElementById("clock");
             if (clock) clock.innerHTML = now.format("HH:mm");
+            var clockDuplicate = document.getElementById("clockDuplicate");
+            if (clockDuplicate) clockDuplicate.innerHTML = now.format("HH:mm");
             var title = document.getElementById("calendarTitle");
             var grid = document.getElementById("calendarGrid");
             if (!title || !grid) return;
             title.innerHTML = now.format("MMMM YYYY");
+            var titleDuplicate = document.getElementById("calendarTitleDuplicate");
+            if (titleDuplicate) titleDuplicate.innerHTML = now.format("MMMM YYYY");
             var first = now.clone().startOf("month");
             var offset = (first.day() + 6) % 7; // Monday first
             var days = now.daysInMonth();
@@ -671,6 +686,7 @@
         <div class="tempWrapper"><div id="temp"></div></div>
         <div id="description"></div>
         <a id="configButton" href="./config.html">CONFIGURAR</a>
+        <div id="clockDuplicate">--:--</div>
         <div id="sun"></div>
         <div id="lastUpdate"></div>
     </section>
@@ -700,6 +716,7 @@
     <section id="calendarPanel" class="panel" aria-label="Calendario mensual">
         <div id="calendarTitle"></div>
         <div id="calendarGrid"></div>
+        <div id="calendarTitleDuplicate"></div>
         <div id="dailyFact"><div id="dailyFactTitle">¿SABÍAS QUE…?</div><div id="dailyFactText"></div></div>
     </section>
 </div>

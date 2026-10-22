@@ -143,5 +143,11 @@ var curiosidades = [
   "Una colección de hechos revisados es preferible a miles de entradas repetitivas o inventadas.",
   "Las curiosidades históricas deben distinguir hechos documentados de leyendas populares.",
   "Los datos sobre récords naturales pueden cambiar según la definición y el método de medición.",
-  "Las fuentes científicas y educativas ayudan a verificar datos antes de publicarlos."
+  "Las fuentes científicas y educativas ayudan a verificar datos antes de publicarlos.",
+  "Una buena curiosidad combina sorpresa con una explicación sencilla.",
+  "El contenido secundario no debería desplazar la temperatura ni la previsión.",
+  "El tamaño de letra debe probarse en el dispositivo real, no solo en un ordenador.",
+  "Una tabla con filas explícitas puede renderizarse de forma fiable en navegadores antiguos.",
+  "El contenido adicional debe reservar su propio espacio para no invadir el calendario.",
+  "Una curiosidad diaria convierte una pantalla estática en una pequeña rutina de aprendizaje."
 ];
