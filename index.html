@@ -125,8 +125,8 @@
         }
 
         function updateClockAndCalendar() {
-            // Modo automático: oscuro desde las 22:00 hasta las 06:59; claro desde las 07:00.
-          setNightMode();
+            // Modo automático: oscuro desde las 22:00 hasta las 08:59; claro desde las 09:00.
+           setNightMode();
             
 
             var factText = document.getElementById("dailyFactText");
@@ -613,15 +613,14 @@
         }
 
         function isNight(f, t) {
-            var from = parseInt(f);
-            var to = parseInt(t);
-
-            var now = momentWithCorrectUtcOffset(new Date()).hour();
+            var from = parseInt(f,10);
+            var to = parseInt(t,10);
+			var now = new Date().getHours();
 
             if (from > to) {
-                return from <= now || to > now;
+                return now >= from || now < to;
             } else {
-                return from <= now && to > now;
+                return now >= from && now < to;
             }
         }
 
