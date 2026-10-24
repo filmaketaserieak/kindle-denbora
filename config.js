@@ -10,6 +10,6 @@ var forecastType = "hour";
 var refreshTime = 30 * 60 * 1000;
 // Si el Kindle ya está en horizontal, se detectará automáticamente. Si aparece vertical, prueba "ll".
 var rotation = "ll";
-var night_mode = "22-7";
+var night_mode = "22-9"; // modo nocturno de 22:00 a 08:59
 var utcOffset = null;
 var tempType = "actual";
