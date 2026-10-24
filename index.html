@@ -126,15 +126,8 @@
 
         function updateClockAndCalendar() {
             // Modo automático: oscuro desde las 22:00 hasta las 06:59; claro desde las 07:00.
-            var localHour = new Date().getHours();
-            var useNightMode = (localHour >= 22 || localHour < 7);
-            if (document.body) {
-                if (useNightMode) {
-                    if (document.body.className.indexOf("night") === -1) document.body.className += " night";
-                } else {
-                    document.body.className = document.body.className.replace(/\\bnight\\b/g, "").replace(/\\s+/g, " ").replace(/^ | $/g, "");
-                }
-            }
+          setNightMode();
+            
 
             var factText = document.getElementById("dailyFactText");
             if (factText && typeof curiosidades !== "undefined" && curiosidades.length) {
